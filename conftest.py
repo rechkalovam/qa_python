@@ -12,7 +12,7 @@ def add_book():
 def set_book_genre():
     collector = BooksCollector()
     collector.add_new_book(data.book_1)
-    collector.set_book_genre(data.book_1, data.genre_in_list)
+    collector.set_book_genre(data.book_1, data.genre_in_list_1)
     return collector
 
 @pytest.fixture
