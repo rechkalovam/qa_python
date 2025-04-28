@@ -26,10 +26,12 @@ class TestBooksCollector:
         assert set_book_genre.get_book_genre(data.book_1) == data.genre_in_list_1
 
     def test_set_book_genre_book_not_in_book_genre_set_error(self, add_book):
-        assert not add_book.set_book_genre(data.book_2, data.genre_in_list_1)
+        add_book.set_book_genre(data.book_2, data.genre_in_list_1)
+        assert not add_book.get_book_genre(data.book_2)
     
     def test_set_book_genre_genre_not_in_genre_set_error(self, add_book):
-        assert not add_book.set_book_genre(data.book_1, data.genre_not_in_list)
+        add_book.set_book_genre(data.book_1, data.genre_not_in_list)
+        assert add_book.get_book_genre(data.book_1) == ''
     
     #тесты на метод get_book_genre
     def test_get_book_genre_book_in_book_genre_get_genre(self, set_book_genre):
