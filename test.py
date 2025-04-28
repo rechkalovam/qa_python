@@ -6,7 +6,7 @@ import data
 class TestBooksCollector:
 
     #тесты на метод add_new_book
-    @pytest.mark.parametrize('name', [data.name_1_symbols, data.name_40_symbols, data.book_1])
+    @pytest.mark.parametrize('name', [data.name_1_symbol, data.name_40_symbols, data.book_1])
     def test_add_new_book_add_one_book_success(self, name):
         collector = BooksCollector()
         collector.add_new_book(name)
@@ -26,12 +26,10 @@ class TestBooksCollector:
         assert set_book_genre.get_book_genre(data.book_1) == data.genre_in_list_1
 
     def test_set_book_genre_book_not_in_book_genre_set_error(self, add_book):
-        add_book.set_book_genre(data.book_2, data.genre_in_list_1)
-        assert not add_book.get_book_genre(data.book_2)
+        assert not add_book.set_book_genre(data.book_2, data.genre_in_list_1)
     
     def test_set_book_genre_genre_not_in_genre_set_error(self, add_book):
-        add_book.set_book_genre(data.book_1, data.genre_not_in_list)
-        assert add_book.get_book_genre(data.book_1) == ''
+        assert not add_book.set_book_genre(data.book_1, data.genre_not_in_list)
     
     #тесты на метод get_book_genre
     def test_get_book_genre_book_in_book_genre_get_genre(self, set_book_genre):
