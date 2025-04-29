@@ -22,8 +22,9 @@ class TestBooksCollector:
         assert len(add_book.get_books_genre()) == 1
     
     #тесты на метод set_book_genre
-    def test_set_book_genre_book_in_books_genre_and_genre_in_genre_success(self, set_book_genre):
-        assert set_book_genre.get_book_genre(data.book_1) == data.genre_in_list_1
+    def test_set_book_genre_book_in_books_genre_and_genre_in_genre_success(self, add_book):
+        add_book.set_book_genre(data.book_1, data.genre_in_list_1)
+        assert add_book.get_book_genre(data.book_1) == data.genre_in_list_1
 
     def test_set_book_genre_book_not_in_book_genre_set_error(self, add_book):
         add_book.set_book_genre(data.book_2, data.genre_in_list_1)
@@ -68,16 +69,18 @@ class TestBooksCollector:
         assert add_book.get_books_for_children() == []
 
     #тесты на метод add_book_in_favorites
-    def test_add_book_in_favorites_book_in_books_genre_success(self, add_favorite_book):
-        assert add_favorite_book.get_list_of_favorites_books() == [data.book_1]
+    def test_add_book_in_favorites_book_in_books_genre_success(self, add_book):
+        add_book.add_book_in_favorites(data.book_1)
+        assert add_book.get_list_of_favorites_books() == [data.book_1]
 
     def test_add_book_in_favorites_book_not_in_books_genre_error(self, add_book):
         add_book.add_book_in_favorites(data.book_2)
         assert add_book.get_list_of_favorites_books() == []
 
-    def test_add_book_in_favorites_add_book_twice_add_error(self, add_favorite_book):
-        add_favorite_book.add_book_in_favorites(data.book_1)
-        assert len(add_favorite_book.get_list_of_favorites_books()) == 1
+    def test_add_book_in_favorites_add_book_twice_add_error(self, add_book):
+        add_book.add_book_in_favorites(data.book_1)
+        add_book.add_book_in_favorites(data.book_1)
+        assert len(add_book.get_list_of_favorites_books()) == 1
 
     #тесты на метод delete_book_from_favorites
     def test_delete_book_from_favorites_book_in_favorites_success(self, add_favorite_book):
